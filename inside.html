@@ -1,0 +1,487 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title> Admin Dashboard ::</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="assets/css/vendor/animsition.min.css">
+        <link rel="stylesheet" href="assets/js/vendor/datatables/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="assets/js/vendor/datatables/datatables.bootstrap.min.css">
+        <link rel="stylesheet" href="assets/js/vendor/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css">
+        <link rel="stylesheet" href="assets/js/vendor/datatables/extensions/Responsive/css/dataTables.responsive.css">
+        <link rel="stylesheet" href="assets/js/vendor/datatables/extensions/ColVis/css/dataTables.colVis.min.css">
+        <link rel="stylesheet" href="assets/js/vendor/datatables/extensions/TableTools/css/dataTables.tableTools.min.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <script src="assets/js/vendor/modernizr/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body id="oakleaf" class="main_Wrapper" ng-app="mainApp" ng-controller="insideCtrl">
+        <!-- Application Content  -->
+        <div id="wrap" class="animsition"> 
+            <!-- HEADER Content -->
+            <section id="header">
+                <header class="clearfix"> 
+                    <!-- Branding -->
+                    <div class="branding"> <a><img src="assets/images/logo-top.png" style="position: relative; height: 66px;"></a> <a role="button" tabindex="0" class="offcanvas-toggle visible-xs-inline"><i class="fa fa-bars"></i></a> </div>
+                    <!-- Branding end --> 
+                    <!-- Left-side navigation -->
+<!--
+                    <ul class="nav-left pull-left list-unstyled list-inline">
+                        <li class="leftmenu-collapse"><a role="button" tabindex="0" class="collapse-leftmenu"><i class="fa fa-arrow-circle-o-left"></i></a></li>
+                    </ul>
+-->
+                    <!-- Left-side navigation end --> 
+                    <!-- Search -->
+<!--
+                    <div class="search" id="main-search">
+                        <input type="text" class="form-control underline-input" placeholder="search....">
+                    </div>
+-->
+                    <!-- Search end --> 
+                    <!-- Right-side navigation -->
+                    <ul class="nav-right pull-right list-inline">
+                        <li class="dropdown nav-profile"> <a href class="dropdown-toggle" data-toggle="dropdown"> <img src="assets/images/profile-2.jpg" alt="" class="0 size-30x30"></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <div class="user-info">
+                                        <div class="user-name">Pharmacy Admin</div>
+<!--                                        <div class="user-position online">Available</div>-->
+                                    </div>
+                                </li>
+<!--                                <li> <a role="button" tabindex="0"><i class="fa fa-cog"></i>Settings</a></li>-->
+<!--                                <li class="divider"></li>-->
+<!--                                <li><a href="locked.html" role="button" tabindex="0"><i class="fa fa-lock"></i>Lock</a></li>-->
+                                <li ng-click="logout()"><a href=""><i class="fa fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown notifications"> 
+                            <a href class="dropdown-toggle" data-toggle="dropdown"> 
+                                <i class="fa fa-bell"></i>
+                                <div class="notify" ng-if="newnotification"><span class="heartbit"></span><span class="point"></span></div>
+                            </a>
+                            <div class="dropdown-menu pull-right with-arrow panel panel-default ">					
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-if="!newnotification">
+                                        <a class="media">
+                                            <span class="pull-left media-object media-icon">
+                                                <i class="fa fa-ban"></i>
+                                            </span>
+                                            <div class="media-body"> 
+                                                <h5>No Notifications available right now</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item" ng-if="newnotification" ng-click="clearnotification()">
+                                        <a role="button" tabindex="0" class="media">
+                                            <span class="pull-left media-object media-icon">
+                                                <i class="fa fa-spotify"></i> 
+                                            </span>
+                                            <div class="media-body"> 
+                                                <span class="block">List Changed</span> 
+                                                <small class="text-muted">Pending Requests</small> 
+                                            </div>
+                                        </a> 
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- Right-side navigation end --> 
+                </header>
+            </section>
+            <!--/ HEADER Content  --> 
+            <!--  CONTROLS Content  -->
+            <div id="controls"> 
+                <!--SIDEBAR Content -->
+                <aside id="leftmenu">
+                    <div id="leftmenu-wrap">
+                        <div class="panel-group slim-scroll" role="tablist">
+                            <div class="panel panel-default">						
+                                <div id="leftmenuNav" class="panel-collapse collapse in" role="tabpanel">
+                                    <div class="panel-body"> 
+                                    <!--  NAVIGATION Content -->
+                                        <ul id="navigation">
+                                            <li  class="active ">
+                                                <a href="" data-target="#newrequest" aria-controls="newrequest" role="tab" data-toggle="tab">
+                                                    <i class="fa fa-table"></i>
+                                                    <span>New orders</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="" data-target="#statuspage" aria-controls="statuspage" role="tab" data-toggle="tab">
+                                                    <i class="fa fa-table"></i>
+                                                    <span>Dashboard</span>
+                                                </a>
+                                            </li>							
+                                        </ul>
+                                    <!--/ NAVIGATION Content --> 
+                                    </div>
+                                </div>
+                            </div>
+<!--
+                            <div class="panel settings panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <h4 class="panel-title"><a data-toggle="collapse" href="#leftmenuControls">General Settings <i class="fa fa-angle-up"></i></a></h4>
+                                </div>
+                                <div id="leftmenuControls" class="panel-collapse collapse in" role="tabpanel">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-xs-8">Switch ON</label>
+                                                <div class="col-xs-4 control-label">
+                                                    <div class="togglebutton">
+                                                        <label>
+                                                            <input type="checkbox" checked="">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-xs-8">Switch OFF</label>
+                                                <div class="col-xs-4 control-label">
+                                                    <div class="togglebutton">
+                                                        <label>
+                                                            <input type="checkbox" unchecked="">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="milestone-sidbar">
+                                    <div class="text-center-folded"> <span class="pull-right pull-none-folded">60%</span> <span class="hidden-folded">Milestone</span> </div>
+                                    <div class="progress progress-xxs m-t-sm dk">
+                                        <div class="progress-bar progress-bar-info" style="width: 60%;"> </div>
+                                    </div>
+                                    <div class="text-center-folded"> <span class="pull-right pull-none-folded">35%</span> <span class="hidden-folded">Release</span> </div>
+                                    <div class="progress progress-xxs m-t-sm dk">
+                                        <div class="progress-bar progress-bar-primary" style="width: 35%;"> </div>
+                                    </div>
+                                </div>
+                            </div>
+-->
+                        </div>
+                    </div>
+                </aside>
+                <!--/ SIDEBAR Content --> 
+            </div>
+            <!--/ CONTROLS Content --> 
+            <!-- CONTENT  -->
+            <section id="content">
+                <div class="page static-page-tables"> 
+                    <!-- bradcome -->
+                    <div class="bg-light lter b-b wrapper-md mb-10">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                            <h1 class="font-thin h3 m-0">Status</h1>
+                            <small class="text-muted">Welcome to Misr pharmacies </small> </div>
+                            <div class="col-sm-6 col-xs-12"> 
+                                <p class="pull-right"><img src="assets/images/logo-2.png" style="height: 66px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="newrequest">
+                            <!-- row -->
+                            <div class="row">
+                                <label>Id Only: <input ng-model="searchText.Order_ID"></label>
+                                <label>Any: <input ng-model="searchText.$"></label>
+                                <div class="col-md-12">
+                                    <section class="boxs ">
+                                        <div class="boxs-body p-0">
+                                            <div class="table-responsive">
+                                                <table class="table table-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <!--<th>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" name="optionsCheckboxes"></label>
+                                                                </div>
+                                                            </th>-->
+                                                            <th>ID</th>
+                                                            <th>Customer</th>
+                                                            <th>Medications</th>
+                                                            <th>Address</th>
+                                                            <th>Comment</th>
+<!--                                                            <th>Rate</th>-->
+                                                            <th>Date</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="activereq in pendinglist | filter:searchText">
+                                                            <!--<td>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" ng-model="actcheck_{{activereq.Order_ID}}"></label>
+                                                                </div>
+                                                            </td>-->
+                                                            <td><span>{{activereq.Order_ID}}</span></td>
+                                                            <td class="nowrap"><img  ng-src={{activereq.PatientPhoto}} onerror="this.src='assets/images/avatar4.png';" alt="Ptient image" width="36" height="36"><strong> {{activereq.PatientName}}</strong></td>
+                                                            <td class="maw-320"><a href="" ng-click="showmedication(activereq.PatientName, activereq.OrderImage, activereq.Order_Medications)">Medication</a></td>
+                                                            <th>{{activereq.Address}}</th>
+                                                            <th>{{activereq.Comment}}</th>
+                                                            <!--<th ng-if="activereq.Rate > 0">{{activereq.Rate}} &sol; 5</th>
+                                                            <th ng-if="activereq.Rate == 0">Not Rated Yet</th>-->
+                                                            <td>
+                                                                {{activereq.Date.substr(0, (activereq.Date.indexOf(" ")))}}
+                                                                <br>
+                                                                {{activereq.Date.substr((activereq.Date.indexOf(" ")))}}
+                                                            </td>
+                                                            <td>
+                                                                <select ng-model="activereq.Status" style="min-width:70px">
+                                                                    <option value="" disabled selected>Status</option>
+                                                                    <option value="Pending">Pending</option>
+                                                                    <option value="Accepted">Accepted</option>
+                                                                    <option value="On the way">On the way</option>
+                                                                    <option value="Delivered">Delivered</option>
+                                                                    <option value="Canceled">Canceled</option>
+                                                                </select>
+                                                                <br>
+                                                                <input type="text" ng-model="comment" placeholder="Pending Message">
+                                                                <br>
+                                                                <button ng-click="changestatus(activereq.Order_ID, activereq.Status, comment)" class="btn btn-primary">Save Change</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="statuspage">
+                            <!-- row -->
+                            <div class="row">
+                                <label>Id Only: <input ng-model="searchdash.Order_ID"></label>
+                                <label>Any: <input ng-model="searchdash.$"></label>
+                                <label>Rating Only: <input ng-model="searchdash.Rate"></label>
+                                <label>Status: <input ng-model="searchdash.Status"></label>
+                                <div class="col-md-12">
+                                    <section class="boxs ">
+                                        <div class="boxs-body p-0">
+                                            <div class="table-responsive">
+                                                <table class="table table-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <!--<th>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" name="optionsCheckboxes"></label>
+                                                                </div>
+                                                            </th>-->
+                                                            <th>ID</th>
+                                                            <th>Customer</th>
+                                                            <th>Medications</th>
+                                                            <th>Address</th>
+                                                            <th>Comment</th>
+                                                            <th>Rate</th>
+                                                            <th>Date</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="acceptreq in Acceptedlist | filter:searchdash">
+                                                            <!--<td>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" ng-model="actcheck_{{activereq.Order_ID}}"></label>
+                                                                </div>
+                                                            </td>-->
+                                                            <td><span>{{acceptreq.Order_ID}}</span></td>
+                                                            <td class="nowrap"><img  ng-src={{acceptreq.PatientPhoto}} onerror="this.src='assets/images/avatar4.png';" alt="Ptient image" width="36" height="36"><strong> {{acceptreq.PatientName}}</strong></td>
+                                                            <td class="maw-320"><a href="" ng-click="showmedication(acceptreq.PatientName, acceptreq.OrderImage, acceptreq.Order_Medications)">Medication</a></td>
+                                                            <th>{{acceptreq.Address}}</th>
+                                                            <th>{{acceptreq.Comment}}</th>
+                                                            <th ng-if="acceptreq.Rate > 0">
+                                                                {{acceptreq.Rate}} &sol; 5<br>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="acceptreq.Rate >= 1"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="acceptreq.Rate >= 2"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="acceptreq.Rate >= 3"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="acceptreq.Rate >= 4"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="acceptreq.Rate >= 5"></i>
+                                                            </th>
+                                                            <th ng-if="acceptreq.Rate == 0">Not Rated Yet</th>
+                                                            <td>
+                                                                {{acceptreq.Date.substr(0, (acceptreq.Date.indexOf(" ")))}}
+                                                                <br>
+                                                                {{acceptreq.Date.substr((acceptreq.Date.indexOf(" ")))}}
+                                                            </td>
+                                                            <td>
+                                                                <select ng-model="acceptreq.Status" style="min-width:70px">
+                                                                    <option value="" disabled selected>Status</option>
+                                                                    <option value="Pending">Pending</option>
+                                                                    <option value="Accepted">Accepted</option>
+                                                                    <option value="On the way">On the way</option>
+                                                                    <option value="Delivered">Delivered</option>
+                                                                    <option value="Canceled">Canceled</option>
+                                                                </select>
+                                                                <br>
+                                                                <input type="text" ng-model="comment_acceptreq.Order_ID" placeholder="Pending Message">
+                                                                <br>
+                                                                <button ng-click="changestatus(acceptreq.Order_ID, acceptreq.Status, comment_acceptreq.Order_ID)" class="btn btn-primary">Save Change</button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-repeat="onthewayreq in Onthewaylist | filter:searchdash">
+                                                            <!--<td>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" ng-model="actcheck_{{activereq.Order_ID}}"></label>
+                                                                </div>
+                                                            </td>-->
+                                                            <td><span>{{onthewayreq.Order_ID}}</span></td>
+                                                            <td class="nowrap"><img  ng-src={{onthewayreq.PatientPhoto}} onerror="this.src='assets/images/avatar4.png';" alt="Ptient image" width="36" height="36"><strong> {{onthewayreq.PatientName}}</strong></td>
+                                                            <td class="maw-320"><a href="" ng-click="showmedication(onthewayreq.PatientName, onthewayreq.OrderImage, onthewayreq.Order_Medications)">Medication</a></td>
+                                                            <th>{{onthewayreq.Address}}</th>
+                                                            <th>{{onthewayreq.Comment}}</th>
+                                                            <th ng-if="onthewayreq.Rate > 0">
+                                                                {{onthewayreq.Rate}} &sol; 5<br>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="onthewayreq.Rate >= 1"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="onthewayreq.Rate >= 2"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="onthewayreq.Rate >= 3"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="onthewayreq.Rate >= 4"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="onthewayreq.Rate >= 5"></i>
+                                                            </th>
+                                                            <th ng-if="onthewayreq.Rate == 0">Not Rated Yet</th>
+                                                            <td>
+                                                                {{onthewayreq.Date.substr(0, (onthewayreq.Date.indexOf(" ")))}}
+                                                                <br>
+                                                                {{onthewayreq.Date.substr((onthewayreq.Date.indexOf(" ")))}}
+                                                            </td>
+                                                            <td>
+                                                                <select ng-model="onthewayreq.Status" style="min-width:70px">
+                                                                    <option value="" disabled selected>Status</option>
+                                                                    <option value="On the way">On the way</option>
+                                                                    <option value="Delivered">Delivered</option>
+                                                                    <option value="Canceled">Canceled</option>
+                                                                </select>
+                                                                <br>
+                                                                <button ng-click="changestatus(onthewayreq.Order_ID, onthewayreq.Status, comment_onthewayreq.Order_ID)" class="btn btn-primary">Save Change</button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-repeat="Deliveredreq in Deliveredlist | filter:searchdash">
+                                                            <!--<td>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" ng-model="actcheck_{{activereq.Order_ID}}"></label>
+                                                                </div>
+                                                            </td>-->
+                                                            <td><span>{{Deliveredreq.Order_ID}}</span></td>
+                                                            <td class="nowrap"><img  ng-src={{Deliveredreq.PatientPhoto}} onerror="this.src='assets/images/avatar4.png';" alt="Ptient image" width="36" height="36"><strong> {{Deliveredreq.PatientName}}</strong></td>
+                                                            <td class="maw-320"><a href="" ng-click="showmedication(Deliveredreq.PatientName, Deliveredreq.OrderImage, Deliveredreq.Order_Medications)">Medication</a></td>
+                                                            <th>{{Deliveredreq.Address}}</th>
+                                                            <th>{{Deliveredreq.Comment}}</th>
+                                                            <th ng-if="Deliveredreq.Rate > 0">
+                                                                {{Deliveredreq.Rate}} &sol; 5<br>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Deliveredreq.Rate >= 1"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Deliveredreq.Rate >= 2"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Deliveredreq.Rate >= 3"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Deliveredreq.Rate >= 4"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Deliveredreq.Rate >= 5"></i>
+                                                            </th>
+                                                            <th ng-if="Deliveredreq.Rate == 0">Not Rated Yet</th>
+                                                            <td>
+                                                                {{Deliveredreq.Date.substr(0, (Deliveredreq.Date.indexOf(" ")))}}
+                                                                <br>
+                                                                {{Deliveredreq.Date.substr((Deliveredreq.Date.indexOf(" ")))}}
+                                                            </td>
+                                                            <td>
+                                                                <span class="label label-success">Delivered</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-repeat="Canceledreq in Canceledlist | filter:searchdash">
+                                                            <!--<td>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" ng-model="actcheck_{{activereq.Order_ID}}"></label>
+                                                                </div>
+                                                            </td>-->
+                                                            <td><span>{{Canceledreq.Order_ID}}</span></td>
+                                                            <td class="nowrap"><img  ng-src={{Canceledreq.PatientPhoto}} onerror="this.src='assets/images/avatar4.png';" alt="Ptient image" width="36" height="36"><strong> {{Canceledreq.PatientName}}</strong></td>
+                                                            <td class="maw-320"><a href="" ng-click="showmedication(Canceledreq.PatientName, Canceledreq.OrderImage, Canceledreq.Order_Medications)">Medication</a></td>
+                                                            <th>{{Canceledreq.Address}}</th>
+                                                            <th>{{Canceledreq.Comment}}</th>
+                                                            <th ng-if="Canceledreq.Rate > 0">
+                                                                {{Canceledreq.Rate}} &sol; 5<br>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Canceledreq.Rate >= 1"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Canceledreq.Rate >= 2"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Canceledreq.Rate >= 3"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Canceledreq.Rate >= 4"></i>
+                                                                <i class="fa fa-star" style="color: gold" ng-if="Canceledreq.Rate >= 5"></i>
+                                                            </th>
+                                                            <th ng-if="Canceledreq.Rate == 0">Not Rated Yet</th>
+                                                            <td>
+                                                                {{Canceledreq.Date.substr(0, (Canceledreq.Date.indexOf(" ")))}}
+                                                                <br>
+                                                                {{Canceledreq.Date.substr((Canceledreq.Date.indexOf(" ")))}}
+                                                            </td>
+                                                            <td>
+                                                                <span class="label label-danger">Cancelled</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ CONTENT --> 
+        </div>
+        <!--/ Application Content -->
+        <!-- Error Modal -->
+        <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Sorry something went wrong</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lead">{{ErrorMSG}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Error Modal -->
+        <div class="modal fade" id="medicationmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{medicationowner}} Medications</h4>
+                    </div>
+                    <div class="modal-body">
+                        <img  ng-src={{medicationimage}} alt="Prescription" width="36" height="36">
+                        <div class="row">
+                            <div ng-repeat="med in medicationlist">
+                                <p class="lead text-center">{{med.Medicine_Name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Vendor JavaScripts  -->
+        <script src="assets/bundles/libscripts.bundle.js"></script>
+        <script src="assets/bundles/vendorscripts.bundle.js"></script>
+        <script src="assets/bundles/datatablesscripts.bundle.js"></script>
+        <!--/ vendor javascripts --> 
+        <!-- Custom JavaScripts -->
+        <script src="assets/js/angular.min.js"></script>
+        <script src="assets/js/angular-cookies.min.js"></script>
+        <script src="assets/js/jsplugins.js"></script>
+        <script src="assets/js/main.js"></script> 
+        <!--/ custom javascripts --> 
+    </body>
+</html>

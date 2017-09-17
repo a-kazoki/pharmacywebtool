@@ -1,0 +1,80 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <title>Admin login</title>
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+        <!-- CSS Files -->
+        <link href="assets/css/main.css" rel="stylesheet">
+    </head>
+    <body class="signup-page" ng-app="myApp" ng-controller="loginCtrl">
+        <div class="wrapper">
+            <div class="header header-filter" style="background-image: url('assets/images/login-bg.jpg'); background-size: cover; background-position:  center;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 hidden-xs">
+                            <p class="text-center" style="margin: 145px 0px"><img src="assets/images/logo.png" class="img-responsive" style="display: block; margin: auto"></p>
+                        </div>
+                        <div class="col-md-4 col-sm-6 text-center">
+                            <div class="card card-signup">
+                            <form ng-submit="login()">
+                                <div class="header header-primary text-center">
+                                    <h4>Sign in</h4>
+                                </div>
+                                <div class="content">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control underline-input" placeholder="Enter Your Email or User Name" ng-model="uname" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" placeholder="Password..." class="form-control underline-input" ng-model="upass" required>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" ng-model="rememberme" unchecked>
+                                        Remember me</label>
+                                    </div>
+                                </div>
+                                <div class="footer text-center">
+                                    <button type="submit" class="btn btn-primary btn-raised">Login</button>
+                                </div>
+<!--                                <a href="" class="btn btn-primary btn-wd btn-lg">Forgot Password?</a>-->
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer">
+                    <div class="container">
+                        <div class="copyright text-center" style="color: #666"> &copy; 2017, made with <i class="fa fa-heart heart"></i> by <a href="http://www.yackeensolutions.com" target="_blank" style="color: #100b3a">Yackeen solutions </a> </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <!-- Error Modal -->
+        <div class="modal fade" id="loginerror" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Login Error</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lead">{{ErrorMSG}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Vendor JavaScripts --> 
+        <script src="assets/bundles/libscripts.bundle.js"></script>
+        <!--  Custom JavaScripts  --> 
+        <script src="assets/js/angular.min.js"></script>
+        <script src="assets/js/angular-cookies.min.js"></script>
+        <script src="assets/js/jsplugins.js"></script>
+        <script src="assets/js/main.js"></script> 
+        <!--/ custom javascripts --> 
+    </body>
+</html>
