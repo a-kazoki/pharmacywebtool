@@ -244,7 +244,7 @@
                                                                 <br>
                                                                 <input type="text" ng-model="comment" placeholder="Pending Message">
                                                                 <br>
-                                                                <button ng-click="changestatus(activereq.Order_ID, activereq.Status, comment)" class="btn btn-primary">Save Change</button>
+                                                                <button ng-click="changestatus(activereq.Order_ID, activereq.Status, comment)">Save Change</button>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -260,8 +260,26 @@
                             <div class="row">
                                 <label>Id Only: <input ng-model="searchdash.Order_ID"></label>
                                 <label>Any: <input ng-model="searchdash.$"></label>
-                                <label>Rating Only: <input ng-model="searchdash.Rate"></label>
-                                <label>Status: <input ng-model="searchdash.Status"></label>
+                                <label>Rating Only: <select ng-model="searchdash.Rate" style="min-width:70px">
+                                                        <option value="" selected>All</option>
+                                                        <option value="0">Not Rated</option>
+                                                        <option value="1">1 Star</option>
+                                                        <option value="2">2 Star</option>
+                                                        <option value="3">3 Star</option>
+                                                        <option value="4">4 Star</option>
+                                                        <option value="5">5 Star</option>
+                                                    </select>
+<!--                                    <input ng-model="searchdash.Rate">-->
+                                </label>
+                                <label>Status: <select ng-model="searchdash.Status" style="min-width:70px">
+                                                    <option value="" selected>All</option>
+                                                    <option value="Accepted">Accepted</option>
+                                                    <option value="On the way">On the way</option>
+                                                    <option value="Delivered">Delivered</option>
+                                                    <option value="Canceled">Canceled</option>
+                                                </select>
+                                    <!--<input ng-model="searchdash.Status">-->
+                                </label>
                                 <div class="col-md-12">
                                     <section class="boxs ">
                                         <div class="boxs-body p-0">
@@ -322,7 +340,7 @@
                                                                 <br>
                                                                 <input type="text" ng-model="comment_acceptreq.Order_ID" placeholder="Pending Message">
                                                                 <br>
-                                                                <button ng-click="changestatus(acceptreq.Order_ID, acceptreq.Status, comment_acceptreq.Order_ID)" class="btn btn-primary">Save Change</button>
+                                                                <button ng-click="changestatus(acceptreq.Order_ID, acceptreq.Status, comment_acceptreq.Order_ID)">Save Change</button>
                                                             </td>
                                                         </tr>
                                                         <tr ng-repeat="onthewayreq in Onthewaylist | filter:searchdash">
@@ -358,7 +376,7 @@
                                                                     <option value="Canceled">Canceled</option>
                                                                 </select>
                                                                 <br>
-                                                                <button ng-click="changestatus(onthewayreq.Order_ID, onthewayreq.Status, comment_onthewayreq.Order_ID)" class="btn btn-primary">Save Change</button>
+                                                                <button ng-click="changestatus(onthewayreq.Order_ID, onthewayreq.Status, comment_onthewayreq.Order_ID)">Save Change</button>
                                                             </td>
                                                         </tr>
                                                         <tr ng-repeat="Deliveredreq in Deliveredlist | filter:searchdash">
@@ -450,7 +468,7 @@
                 </div>
             </div>
         </div>
-        <!-- Error Modal -->
+        <!-- medication Modal -->
         <div class="modal fade" id="medicationmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
